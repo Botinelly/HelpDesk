@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+         {% block content %}
+         {% with messages = get_flashed_messages() %}
+         {% if messages %}
+         <div class="alert alert-warning" >
+           <ul class=flashes>
+             {% for message in messages %}
+             <li>{{ message }}</li>
+             {% endfor %}
+           </ul>
+         </div>
+         {% endif %}
+         {% endwith %}
+
+      <form method="POST">
+        {{ form.csrf_token }}
+        <div class="page-header">
+          <h2>Categoria do chamado</h2>
+        </div>
+      <div style="height: 200px; width:400px;">
+          &nbsp;  {{ form.category }}
+          <button class="btn-sm " type="submit">Próximo</button>
+
+      <div class="page-header">
+
+      {% if form.category.data == "Impressora" %}
+
+              {{ form.category2 }}
+              <div class="page-header">
+                <h2>Detalhes do Chamado</h2>
+              </div>
+              {{ form.obs(placeholder="Observações do chamado", class="form-group form-control", rows="3") }}
+              <p></p>
+              <br><button class="btn btn-lg btn-primary btn-block" type="submit">Próximo</button>
+
+
+      {% endif %}
+
+      {% if form.category.data == "Software" %}
+
+              {{ form.category3 }}
+              <div class="page-header">
+                <h2>Detalhes do Chamado</h2>
+              </div>
+              {{ form.obs(placeholder="Observações do chamado", class="form-group form-control", rows="3") }}
+              <p></p>
+              <br><button class="btn btn-lg btn-primary btn-block" type="submit">Próximo</button>
+
+
+      {% endif %}
+
+      {% if form.category.data == "Otimização" %}
+
+              {{ form.category4 }}
+              <div class="page-header">
+                <h2>Detalhes do Chamado</h2>
+              </div>
+              {{ form.obs(placeholder="Observações do chamado", class="form-group form-control", rows="3") }}
+              <p></p>
+              <br><button class="btn btn-lg btn-primary btn-block" type="submit">Próximo</button>
+
+
+      {% endif %}
+
+      {% if form.category.data == "Rede" %}
+
+              {{ form.category5 }}
+
+              <h2>Detalhes do Chamado</h2>
+
+              {{ form.obs(placeholder="Observações do chamado", class="form-group form-control", rows="3") }}
+              <p></p>
+              <br><button class="btn btn-lg btn-primary btn-block" type="submit">Próximo</button>
+
+      {% endif %}
+        </div>
+      </div>
+          <p></p>
+
+    </form>
+{% endblock %}

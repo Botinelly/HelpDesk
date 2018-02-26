@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static', filename='css/signin.css')}}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" action="" method="POST">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="alert alert-warning" >
+        <ul class=flashes>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {% endwith %}
+      <link rel="icon" href="static/images/GBR.ico">
+      {{ form.csrf_token }}
+      <img class="mb-4" src="static/images/logo.png" alt="" width="60%" height="60%">
+      <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+      <label for="inputEmail" class="sr-only">Email</label>
+      {{form.username(class="form-control",id="inputEmail", placeholder="Email")}}
+      {% if form.errors.username %}
+        <div class="alert alert-danger" role="alert">Usuário incorreto!</div>
+      {% endif %}
+      <label for="inputPassword" class="sr-only">Senha</label>
+      {{form.password(class="form-control",id="inputPassword", placeholder="Senha")}}
+      {% if form.errors.password %}
+        <div class="alert alert-danger" role="alert">Senha incorreta</div>
+      {% endif %}
+      <div class="checkbox mb-3">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
+      <p></p>
+      <p></p>
+      <p class="mt-5 mb-3 text-muted">&copy; Developed by Lucas Botinelly, 2018</p>
+    </form>
+  </body>
+</html>

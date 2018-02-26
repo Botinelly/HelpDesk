@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Chamados{% endblock %}
+
+{% block content %}
+
+            {% for y in post %}
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><b>{{ y.user_id }}</b></h3>
+                  </div>
+                  <div class="panel-body">
+                    <b>ID do chamado:</b> {{ y.id }}<br>
+                    <b>Categoria:</b> {{ y.category }}<br>
+                    <b>Sub-Categoria:</b> {{ y.sub_category }}<br>
+                    <b>Comentário:</b> {{ y.content }}<br>
+                    {% if y.status == 1 %}
+                        <span class="label label-danger">Não Atendido</span>&nbsp;
+                        <!-- Single button -->
+                        <p></p>
+                        <form method="POST">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Editar Estado<span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <form method="POST">
+                                  <div class="list-group-item">
+                                    ID do chamado:
+                                      {{ form.form_id(placeholder = y.id, value = y.id) }}
+                                  </div>
+                                  <div class="list-group-item">
+                                  (clique em cima da bolinha)
+                                  {{ form.options }}
+                                  <button class="btn btn-xs btn-primary btn-block" type="submit">Atualizar</button>
+                                  </div>
+                                </form>
+                              </ul>
+                            </div>
+                    {% elif y.status == 2 %}
+                        <span class="label label-warning">Em execução</span>&nbsp;
+                        <!-- Single button -->
+                        <p></p>
+                        <form method="POST">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Editar Estado<span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <form method="POST">
+                                  <div class="list-group-item">
+                                    ID do chamado:
+                                      {{ form.form_id(placeholder = y.id, value = y.id) }}
+                                  </div>
+                                  <div class="list-group-item">
+                                  (clique em cima da bolinha)
+                                  {{ form.options }}
+                                  <button class="btn btn-xs btn-primary btn-block" type="submit">Atualizar</button>
+                                  </div>
+                                </form>
+                              </ul>
+                            </div>
+                          </form>
+                        {% else %}
+                        <span class="label label-success">Concluído</span>&nbsp;
+                        <!-- Single button -->
+                        <p></p>
+                        <form method="POST">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Editar Estado<span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <form method="POST">
+                                  <div class="list-group-item">
+                                    ID do chamado:
+                                      {{ form.form_id(placeholder = y.id,class="hidden", value = y.id) }}
+                                  </div>
+                                  <div class="list-group-item">
+                                  (clique em cima da bolinha)
+                                  {{ form.options }}
+                                  <button class="btn btn-xs btn-primary btn-block" type="submit">Atualizar</button>
+                                  </div>
+                                </form>
+                              </ul>
+                            </div>
+                          </form>
+                    {% endif %}
+                  </div>
+                </div>
+              </form>
+            {% endfor %}
+
+{% endblock %}

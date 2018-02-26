@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Chamados{% endblock %}
+
+{% block content %}
+
+            {% for y in post %}
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><b>{{ y.user_id }}</b></h3>
+                  </div>
+                  <div class="panel-body">
+                    <b>ID do chamado:</b> {{ y.id }}<br>
+                    <b>Categoria:</b> {{ y.category }}<br>
+                    <b>Sub-Categoria:</b> {{ y.sub_category }}<br>
+                    <b>Comentário:</b> {{ y.content }}<br>
+                    {% if y.status == 1 %}
+                        <span class="label label-danger">Não Atendido</span>
+                    {% elif y.status == 2 %}
+                        <span class="label label-warning">Em execução</span>
+                    {% else %}
+                        <span class="label label-success">Concluído</span>
+                    {% endif %}
+                  </div>
+                </div>
+            {% endfor %}
+
+
+{% endblock %}

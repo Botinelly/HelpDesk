@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Estatísticas{% endblock %}
+{% block content %}
+  <h2>Quantidade de chamados por categoria</h2><br>
+
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="badge">{{ comp[0][0] }}</span>
+        {{ comp[0][1] }}
+      </li>
+    </ul>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="badge">{{ comp[1][0] }}</span>
+        {{ comp[1][1] }}
+      </li>
+    </ul>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="badge">{{ comp[2][0] }}</span>
+        {{ comp[2][1] }}
+      </li>
+    </ul>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="badge">{{ comp[3][0] }}</span>
+        {{ comp[3][1] }}
+      </li>
+    </ul>
+
+    <p></p>
+    <a href="download">
+    <button type="submit" class="btn btn-default" aria-label="Left Align">
+      <span  class="glyphicon glyphicon-download-alt" aria-hidden="false"></span>
+    </button>
+  </a>
+    Baixar como arquivo do Excell
+    <br>
+{% endblock %}
