@@ -7,7 +7,7 @@ import pandas as pd
 from io import BytesIO
 
 from app.models.tables import User, Post
-from app.models.forms import LoginForm, CallForm, EditForm
+from app.models.forms import LoginForm, CallForm, EditForm, RegisterForm
 
 @lm.user_loader
 def load_user(id):
@@ -66,9 +66,11 @@ def lista():
 @login_required
 def stats():
     aux = Post.query.all()
+
     comp = [[0, "Impressora"],[0, "Instalação/Configuração de Software"],[0, "Otimização/Formatação de PC"],[0, "Acesso à rede (Pastas ou Internet)"]]
-    print(aux[1].category)
+
     for i in aux:
+#        print(i.pub_date.year)
         if i.category == "Impressora":
             comp[0][0] +=1
         elif i.category == "Software":
@@ -100,21 +102,60 @@ def login():
 
     return render_template('login.html', form = form)
 
+@app.route("/register", methods=["POST", "GET"])
+@login_required
+def register():
+    rf = RegisterForm()
+    if rf.validate_on_submit():
+        if rf.password.data == rf.password2.data:
+            if rf.admin.data:
+                user = User(rf.username.data, rf.password.data, 1)
+                db.session.add(user)
+                db.session.commit()
+                flash('Registrado !')
+                return redirect(url_for('index'))
+            else:
+                user = User(rf.username.data, rf.password.data, 0)
+                db.session.add(user)
+                db.session.commit()
+                flash('Registrado !')
+                return redirect(url_for('index'))
+        else:
+            flash('Senhas não condizem !')
+    return render_template('register.html', rf = rf)
+
 @app.route("/download")
+@login_required
 def download():
     #create a random Pandas dataframe
     aux = Post.query.all()
-    comp = [["Impressora", 0],["Instalação/Configuração de Software", 0],["Otimização/Formatação de PC", 0],["Acesso à rede (Pastas ou Internet)", 0]]
+    comp = [[0,0,0,0,0,0,0,0,0,0,0,0]]
     for i in aux:
-        if i.category == "Impressora":
-            comp[0][1] +=1
-        elif i.category == "Software":
-            comp[1][1] += 1
-        elif i.category == "Otimização":
-            comp[2][1] += 1
-        elif i.category == "Rede":
-            comp[3][1] += 1
-    labels = ['categoria', 'Demanda']
+        if i.pub_date.month == 1:
+            comp[0][0] += 1
+        elif i.pub_date.month == 2:
+            comp[0][1] += 1
+        elif i.pub_date.month == 3:
+            comp[0][2] += 1
+        elif i.pub_date.month == 4:
+            comp[0][3] += 1
+        elif i.pub_date.month == 5:
+            comp[0][4] += 1
+        elif i.pub_date.month == 6:
+            comp[0][5] += 1
+        elif i.pub_date.month == 7:
+            comp[0][6] += 1
+        elif i.pub_date.month == 8:
+            comp[0][7] += 1
+        elif i.pub_date.month == 9:
+            comp[0][8] += 1
+        elif i.pub_date.month == 10:
+            comp[0][9] += 1
+        elif i.pub_date.month == 11:
+            comp[0][10] += 1
+        elif i.pub_date.month == 12:
+            comp[0][11] += 1
+    labels = ['Jan', 'Fev', 'Mar', 'Abril', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
     df_1 = pd.DataFrame.from_records(comp, columns = labels)
 
     #create an output stream

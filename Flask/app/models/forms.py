@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, SelectField, RadioField, IntegerField
+from wtforms import StringField, PasswordField, TextAreaField, SelectField, RadioField, IntegerField, BooleanField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -19,3 +19,9 @@ class CallForm(FlaskForm):
 class EditForm(FlaskForm):
     options = RadioField("options", choices = [(3, "Concluído"),(2, "Visualizado"),(1, "Não Atendido")], validators = [DataRequired()])
     form_id = IntegerField("id", validators = [DataRequired()])
+
+class RegisterForm(FlaskForm):
+    username = StringField("username", validators = [DataRequired()])
+    password = PasswordField("password", validators = [DataRequired()])
+    password2 = PasswordField("password2", validators = [DataRequired()])
+    admin = BooleanField("admin", validators = [DataRequired()])

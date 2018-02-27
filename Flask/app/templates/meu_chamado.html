@@ -14,6 +14,7 @@
                     <b>Categoria:</b> {{ y.category }}<br>
                     <b>Sub-Categoria:</b> {{ y.sub_category }}<br>
                     <b>Comentário:</b> {{ y.content }}<br>
+                    <b>Data:</b> {{ y.pub_date }}<br>
                     {% if y.status == 1 %}
                         <span class="label label-danger">Não Atendido</span>
                     {% elif y.status == 2 %}

@@ -1,4 +1,5 @@
 from app import db
+from datetime import date
 
 class User(db.Model):
     __tablename__ = "users"
@@ -40,6 +41,7 @@ class Post(db.Model):
     content = db.Column(db.Text)
     user_id = db.Column(db.String(40), db.ForeignKey('users.username'), nullable=False)
     status = db.Column(db.Integer, nullable=False)
+    pub_date = db.Column(db.Date, nullable=False, default=date.today)
 
     user = db.relationship('User', backref=db.backref('users', lazy=True))
 

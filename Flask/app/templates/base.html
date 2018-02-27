@@ -50,6 +50,8 @@
             <li class="active"><a href="index">Home</a></li>
             {% if current_user.admin %}
                 <li><a href="lista">Lista de Chamados</a></li>
+                <li><a href="stats">Estatísticas</a></li>
+                <li><a href="register">Registrar</a></li>
             {% else %}
                 <li><a href="meuchamado">Meus Chamados</a></li>
             {% endif %}
